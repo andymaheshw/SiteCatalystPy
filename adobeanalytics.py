@@ -12,7 +12,7 @@ import pandas as pd
 
 # Authentication
 class adobeanalytics:
-
+    # Define all variables
     def __init__(self, user_name, shared_secret, company):
         self.user_name = user_name
         self.shared_secret = shared_secret
@@ -23,9 +23,8 @@ class adobeanalytics:
     def get_endpoint(self):
         values = {}
         self.api_url = self.omni_api(values, 'Company.GetEndpoint')
-    # Structure Json 
-    def report_queue():
-        
+             
+    #Core Method, Actually runs the JSON request    
     def omni_api(self, json_values, endpoint):
         req = urllib2.Request('%s?method=%s' % (self.api_url, endpoint), json.dumps(json_values))       
         nonce = str(time.time())
@@ -38,5 +37,12 @@ class adobeanalytics:
         response = urllib2.urlopen(req)
         the_page = json.loads(response.read())
         return the_page
+    
+    #Report.Queue
+    def report_queue():
+    
+    #Report.Run
+    
+    
     
     
