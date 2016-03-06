@@ -17,7 +17,7 @@ This is the easiest way to get data from Adobe to accomplish your goals.
 
 ## Installation
 
-   pip install SiteCatalystPy
+    pip install AdobeAnalytics
 
 ## Tests
 
