@@ -11,7 +11,7 @@ import urllib2, time, binascii, sha, json, urllib
 import pandas as pd
 
 # Authentication
-class sitecatalyst:
+class adobeanalytics:
 
     def __init__(self, user_name, shared_secret, company):
         self.user_name = user_name
