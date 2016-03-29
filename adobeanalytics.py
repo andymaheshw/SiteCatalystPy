@@ -18,15 +18,15 @@ class AdobeAnalytics:
          """ 
          self.__user_name = user_name 
          self.__shared_secret = shared_secret 
-         self.company = self.__user_name.split(":")[1] 
+         self.__company = self.__user_name.split(":")[1] 
           
          #If user doesn't specify their own endpoint, call API to get proper endpoint 
          #Most users should never do this, but some have requested capability in RSiteCatalyst 
-         self.api_url = 'https://api.omniture.com/admin/1.4/rest/' 
+         self.__api_url = 'https://api.omniture.com/admin/1.4/rest/' 
          if endpoint != '': 
-             self.api_url = endpoint 
+             self.__api_url = endpoint 
          else: 
-             self.api_url = self.GetEndpoint(company = self.company) 
+             self.__api_url = self.GetEndpoint(company = self.__company) 
   
     def __buildheader(self): 
         """ 
@@ -38,13 +38,13 @@ class AdobeAnalytics:
         created_date = time.strftime("%Y-%m-%dT%H:%M:%SZ",  time.gmtime()) 
         sha_object = hashlib.sha1(nonce + created_date + '%s' % (self.__shared_secret))  
         password_64 = binascii.b2a_base64(sha_object.digest()) 
-        X_str = 'UsernameToken Username="%s", PasswordDigest="%s", Nonce="%s", Created="%s"' % ('%s:%s' % (self.__user_name, self.company), password_64.strip(), base64nonce.strip(), created_date) 
+        X_str = 'UsernameToken Username="%s", PasswordDigest="%s", Nonce="%s", Created="%s"' % ('%s:%s' % (self.__user_name, self.__company), password_64.strip(), base64nonce.strip(), created_date) 
         return {'X-WSSE':X_str} 
         
     #Core Method, Actually runs the JSON request     
-    def __callapi(self, json_values, endpoint): 
+    def __callapi(self, endpoint, **kwargs): 
         header = self.__buildheader() 
-        req = requests.get('%s?method=%s' % (self.api_url, endpoint), params=json.dumps(json_values), headers=header) 
+        req = requests.get('%s?method=%s' % (self.__api_url, endpoint), params=json.dumps(kwargs), headers=header) 
         return req.json() 
       
     def GetEndpoint(self, **kwargs): 
@@ -54,7 +54,7 @@ class AdobeAnalytics:
         Keyword arguments: 
         company -- Company to retrieve endpoint for 
         """ 
-        return self.__callapi(kwargs, 'Company.GetEndpoint') 
+        return self.__callapi('Company.GetEndpoint', **kwargs) 
        
     # def ReportRun(self): 
     #     # build JSON 
@@ -65,4 +65,4 @@ class AdobeAnalytics:
       
     def GetReportSuites(self, **kwargs):
         """Returns all report suites available to user from a given company."""
-        return self.__callapi(kwargs, 'Company.GetReportSuites' )
+        return self.__callapi('Company.GetReportSuites', **kwargs)
