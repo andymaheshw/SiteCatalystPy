@@ -41,8 +41,10 @@ class AdobeAnalytics:
         X_str = 'UsernameToken Username="%s", PasswordDigest="%s", Nonce="%s", Created="%s"' % ('%s:%s' % (self.__user_name, self.__company), password_64.strip(), base64nonce.strip(), created_date) 
         return {'X-WSSE':X_str} 
         
-    #Core Method, Actually runs the JSON request     
     def __callapi(self, endpoint, verb = "POST", **kwargs):
+        """
+        Calls the Adobe Analytics API at a given endpoint and variable arguments
+        """
         header = self.__buildheader()
         if verb == "GET":
             req = requests.get('%s?method=%s' % (self.__api_url, endpoint), params=json.dumps(kwargs), headers=header)
@@ -63,41 +65,41 @@ class AdobeAnalytics:
         """
         return self.__callapi('ReportSuite.GetActivation', rsid_list = rsid_list)
         
-    def GetAxleStartDate(self):
-        return self.__callapi('ReportSuite.GetAxleStartDate', )
+    def GetAxleStartDate(self, rsid_list):
+        return self.__callapi('ReportSuite.GetAxleStartDate', rsid_list = rsid_list)
     
-    def GetBaseCurrency(self, ):
-        return self.__callapi('ReportSuite.GetBaseCurrency', )
+    def GetBaseCurrency(self, rsid_list):
+        return self.__callapi('ReportSuite.GetBaseCurrency', rsid_list = rsid_list)
     
-    def GetBaseURL(self, ):
-        return self.__callapi('ReportSuite.GetBaseURL', )
+    def GetBaseURL(self, rsid_list):
+        return self.__callapi('ReportSuite.GetBaseURL', rsid_list = rsid_list)
     
     def GetBookmarks(self, ):
         return self.__callapi('Bookmark.GetBookmarks', )
     
-    def GetCalculatedMetrics(self, ):
-        return self.__callapi('ReportSuite.GetCalculatedMetrics', )
+    def GetCalculatedMetrics(self, rsid_list):
+        return self.__callapi('ReportSuite.GetCalculatedMetrics', rsid_list = rsid_list)
     
     def GetClassifications(self, ):
         return self.__callapi('ReportSuite.GetClassifications', )
     
-    def GetCustomCalendar(self, ):
-        return self.__callapi('ReportSuite.GetCustomCalendar', )
+    def GetCustomCalendar(self, rsid_list):
+        return self.__callapi('ReportSuite.GetCustomCalendar', rsid_list = rsid_list)
     
     def GetDashboards(self, ):
         return self.__callapi('Bookmark.GetDashboards', )
     
-    def GetDataWarehouseDisplay(self, ):
-        return self.__callapi('ReportSuite.GetDataWarehouseDisplay', )
+    def GetDataWarehouseDisplay(self, rsid_list):
+        return self.__callapi('ReportSuite.GetDataWarehouseDisplay', rsid_list = rsid_list)
     
-    def GetDefaultPage(self, ):
-        return self.__callapi('ReportSuite.GetDefaultPage', )
+    def GetDefaultPage(self, rsid_list):
+        return self.__callapi('ReportSuite.GetDefaultPage', rsid_list = rsid_list)
     
-    def GetDiscoverEnabled(self, ):
-        return self.__callapi('ReportSuite.GetDiscoverEnabled', )
+    def GetDiscoverEnabled(self, rsid_list):
+        return self.__callapi('ReportSuite.GetDiscoverEnabled', rsid_list = rsid_list)
     
-    def GetEcommerce(self, ):
-        return self.__callapi('ReportSuite.GetEcommerce', )
+    def GetEcommerce(self, rsid_list):
+        return self.__callapi('ReportSuite.GetEcommerce', rsid_list = rsid_list)
 
     def GetElements(self, ):
         return self.__callapi('Report.GetElements', )
@@ -111,8 +113,8 @@ class AdobeAnalytics:
         """ 
         return self.__callapi('Company.GetEndpoint', "GET", company = company)
     
-    def GetEvars(self, ):
-        return self.__callapi('ReportSuite.GetEvars', )
+    def GetEvars(self, rsid_list):
+        return self.__callapi('ReportSuite.GetEvars', rsid_list = rsid_list)
     
     def GetFeed(self, ):
         return self.__callapi('DataFeed.GetFeed', )
@@ -123,29 +125,29 @@ class AdobeAnalytics:
     def GetFunctions(self, ):
         return self.__callapi('CalculatedMetrics.GetFunctions', )
     
-    def GetGeoSegmentation(self, ):
-        return self.__callapi('ReportSuite.GetGeoSegmentation', )
+    def GetGeoSegmentation(self, rsid_list):
+        return self.__callapi('ReportSuite.GetGeoSegmentation', rsid_list = rsid_list)
     
     def GetGroups(self, ):
         return self.__callapi('Permissions.GetGroups', )
     
-    def GetInternalURLFilters(self, ):
-        return self.__callapi('ReportSuite.GetInternalURLFilters', )
+    def GetInternalURLFilters(self, rsid_list):
+        return self.__callapi('ReportSuite.GetInternalURLFilters', rsid_list = rsid_list)
 
-    def GetIPAddressExclusions(self, ):
-        return self.__callapi('ReportSuite.GetIPAddressExclusions', )
+    def GetIPAddressExclusions(self, rsid_list):
+        return self.__callapi('ReportSuite.GetIPAddressExclusions', rsid_list = rsid_list)
 
-    def GetIPObfuscation(self, ):
-        return self.__callapi('ReportSuite.GetIPObfuscation', )
+    def GetIPObfuscation(self, rsid_list):
+        return self.__callapi('ReportSuite.GetIPObfuscation', rsid_list = rsid_list)
     
-    def GetKeyVisitors(self, ):
-        return self.__callapi('ReportSuite.GetKeyVisitors', )
+    def GetKeyVisitors(self, rsid_list):
+        return self.__callapi('ReportSuite.GetKeyVisitors', rsid_list = rsid_list)
     
-    def GetListVariables(self, ):
-        return self.__callapi('ReportSuite.GetListVariables', )
+    def GetListVariables(self, rsid_list):
+        return self.__callapi('ReportSuite.GetListVariables', rsid_list = rsid_list)
     
-    def GetLocalization(self, ):
-        return self.__callapi('ReportSuite.GetLocalization', )
+    def GetLocalization(self, rsid_list):
+        return self.__callapi('ReportSuite.GetLocalization', rsid_list = rsid_list)
     
     def GetLogin(self, ):
         return self.__callapi('Permissions.GetLogin', )
@@ -153,38 +155,38 @@ class AdobeAnalytics:
     def GetLogins(self, ):
         return self.__callapi('Permissions.GetLogins', )
     
-    def GetMarketingChannelExpiration(self, ):
-        return self.__callapi('ReportSuite.GetMarketingChannelExpiration', )
+    def GetMarketingChannelExpiration(self, rsid_list):
+        return self.__callapi('ReportSuite.GetMarketingChannelExpiration', rsid_list = rsid_list)
     
-    def GetMarketingChannelRules(self, ):
-        return self.__callapi('ReportSuite.GetMarketingChannelRules', )
+    def GetMarketingChannelRules(self, rsid_list):
+        return self.__callapi('ReportSuite.GetMarketingChannelRules', rsid_list = rsid_list)
     
-    def GetMarketingChannels(self, ):
-        return self.__callapi('ReportSuite.GetMarketingChannels', )
+    def GetMarketingChannels(self, rsid_list):
+        return self.__callapi('ReportSuite.GetMarketingChannels',  rsid_list = rsid_list)
     
     def GetMetrics(self, ):
         return self.__callapi('Report.GetMetrics', )
     
-    def GetMobileAppReporting(self, ):
-        return self.__callapi('ReportSuite.GetMobileAppReporting', )
+    def GetMobileAppReporting(self, rsid_list):
+        return self.__callapi('ReportSuite.GetMobileAppReporting', rsid_list = rsid_list)
     
-    def GetPaidSearchDetection(self, ):
-        return self.__callapi('ReportSuite.GetPaidSearchDetection', )
+    def GetPaidSearchDetection(self, rsid_list):
+        return self.__callapi('ReportSuite.GetPaidSearchDetection', rsid_list = rsid_list)
     
-    def GetPrivacySettings(self, ):
-        return self.__callapi('ReportSuite.GetPrivacySettings', )
+    def GetPrivacySettings(self, rsid_list):
+        return self.__callapi('ReportSuite.GetPrivacySettings', rsid_list = rsid_list)
     
-    def GetProps(self, ):
-        return self.__callapi('ReportSuite.GetProps', )
+    def GetProps(self, rsid_list):
+        return self.__callapi('ReportSuite.GetProps', rsid_list = rsid_list)
     
-    def GetQueue(self, ):
-        return self.__callapi('Report.GetQueue', )
+    def GetQueue(self ):
+        return self.__callapi('Report.GetQueue')
     
     def GetRealTimeReport(self, ):
         return self.__callapi('Company.GetReportSuites', )
     
-    def GetRealTimeSettings(self, ):
-        return self.__callapi('ReportSuite.GetRealTimeSettings', )
+    def GetRealTimeSettings(self, rsid_list):
+        return self.__callapi('ReportSuite.GetRealTimeSettings', rsid_list = rsid_list)
     
     def GetReportDescription(self, ):
         return self.__callapi('Bookmark.GetReportDescription', )
@@ -193,36 +195,36 @@ class AdobeAnalytics:
         """Returns all report suites available to user from a given company."""
         return self.__callapi('Company.GetReportSuites')
     
-    def GetScheduledSpike(self, ):
-        return self.__callapi('ReportSuite.GetScheduledSpike', )
+    def GetScheduledSpike(self, rsid_list):
+        return self.__callapi('ReportSuite.GetScheduledSpike', rsid_list = rsid_list)
 
-    def GetSegments(self, ):
-        return self.__callapi('ReportSuite.GetSegments', )
+    def GetSegments(self, rsid_list):
+        return self.__callapi('ReportSuite.GetSegments', rsid_list = rsid_list)
     
-    def GetSiteTitle(self, ):
-        return self.__callapi('ReportSuite.GetSiteTitle', )
+    def GetSiteTitle(self, rsid_list):
+        return self.__callapi('ReportSuite.GetSiteTitle', rsid_list = rsid_list)
     
-    def GetEvents(self, ):
-        return self.__callapi('ReportSuite.GetEvents', )
+    def GetEvents(self, rsid_list):
+        return self.__callapi('ReportSuite.GetEvents', rsid_list = rsid_list)
     
-    def GetTemplate(self, ):
-        return self.__callapi('ReportSuite.GetTemplate', )
+    def GetTemplate(self, rsid_list):
+        return self.__callapi('ReportSuite.GetTemplate', rsid_list = rsid_list)
     
-    def GetTimeZone(self, ):
-        return self.__callapi('ReportSuite.GetTimeZone', )
+    def GetTimeZone(self, rsid_list):
+        return self.__callapi('ReportSuite.GetTimeZone', rsid_list = rsid_list)
     
-    def GetTrackingServer(self, ):
-        return self.__callapi('Company.GetTrackingServer', )
+    def GetTrackingServer(self, rsid_list):
+        return self.__callapi('Company.GetTrackingServer', rsid_list = rsid_list)
     
-    def GetTransactionEnabled(self, ):
-        return self.__callapi('ReportSuite.GetTransactionEnabled', )
+    def GetTransactionEnabled(self, rsid_list):
+        return self.__callapi('ReportSuite.GetTransactionEnabled', rsid_list = rsid_list)
     
-    def GetUniqueVisitorVariable(self, ):
-        return self.__callapi('ReportSuite.GetUniqueVisitorVariable', )
+    def GetUniqueVisitorVariable(self, rsid_list):
+        return self.__callapi('ReportSuite.GetUniqueVisitorVariable', rsid_list = rsid_list)
     
-    def GetVersionAccess(self, ):
+    def GetVersionAccess(self):
         return self.__callapi('Company.GetVersionAccess', )
     
-    def GetVideoSettings(self, ):
-        return self.__callapi('ReportSuite.GetVideoSettings', )
+    def GetVideoSettings(self, rsid_list):
+        return self.__callapi('ReportSuite.GetVideoSettings', rsid_list = rsid_list)
 
