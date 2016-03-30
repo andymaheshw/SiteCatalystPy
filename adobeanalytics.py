@@ -58,7 +58,7 @@ class AdobeAnalytics:
     
     def GetActivation(self, rsid_list):
         """
-        Returns the activation date for the report suite(s) specified.
+        Retrieves the activation status for each of the specified report suites.
         
         Keyword arguments: 
         rsid_list -- Report suites to evaluate
@@ -66,39 +66,93 @@ class AdobeAnalytics:
         return self.__callapi('ReportSuite.GetActivation', rsid_list = rsid_list)
         
     def GetAxleStartDate(self, rsid_list):
+        """
+        Retrieves the date a report suite was migrated from SiteCatalyst 14 to axle processing (version 15).
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetAxleStartDate', rsid_list = rsid_list)
     
     def GetBaseCurrency(self, rsid_list):
+        """
+        Retrieves a list of supported currency codes for each of the specified report suites
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetBaseCurrency', rsid_list = rsid_list)
     
     def GetBaseURL(self, rsid_list):
+        """
+        Retrieves the base URL assigned to each of the specified report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetBaseURL', rsid_list = rsid_list)
     
     def GetBookmarks(self, ):
         return self.__callapi('Bookmark.GetBookmarks', )
     
     def GetCalculatedMetrics(self, rsid_list):
+        """
+        Retrieves the calculated metrics assigned to each of the specified report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetCalculatedMetrics', rsid_list = rsid_list)
     
     def GetClassifications(self, ):
         return self.__callapi('ReportSuite.GetClassifications', )
     
     def GetCustomCalendar(self, rsid_list):
+        """
+        Retrieves the custom calendar for each of the specified report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetCustomCalendar', rsid_list = rsid_list)
     
     def GetDashboards(self, ):
         return self.__callapi('Bookmark.GetDashboards', )
     
     def GetDataWarehouseDisplay(self, rsid_list):
+        """
+        Returns if data warehouse is enabled for the requested report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetDataWarehouseDisplay', rsid_list = rsid_list)
     
     def GetDefaultPage(self, rsid_list):
+        """
+        Retrieves the default page for each of the specified report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetDefaultPage', rsid_list = rsid_list)
     
     def GetDiscoverEnabled(self, rsid_list):
+        """
+        Returns whether ad hoc analysis (formerly Discover) is enabled for the requested report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetDiscoverEnabled', rsid_list = rsid_list)
     
     def GetEcommerce(self, rsid_list):
+        """
+        Retrieves the commerce level for each of the specified report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetEcommerce', rsid_list = rsid_list)
 
     def GetElements(self, ):
@@ -114,6 +168,12 @@ class AdobeAnalytics:
         return self.__callapi('Company.GetEndpoint', "GET", company = company)
     
     def GetEvars(self, rsid_list):
+        """
+        Retrieves the commerce variables for each of the specified report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetEvars', rsid_list = rsid_list)
     
     def GetFeed(self, ):
@@ -126,27 +186,69 @@ class AdobeAnalytics:
         return self.__callapi('CalculatedMetrics.GetFunctions', )
     
     def GetGeoSegmentation(self, rsid_list):
+        """
+        Retrieves the geography segmentation for the requested report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetGeoSegmentation', rsid_list = rsid_list)
     
     def GetGroups(self, ):
         return self.__callapi('Permissions.GetGroups', )
     
     def GetInternalURLFilters(self, rsid_list):
+        """
+        Retrieves the internal URL filters for each of the specified report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetInternalURLFilters', rsid_list = rsid_list)
 
     def GetIPAddressExclusions(self, rsid_list):
+        """
+        Returns a list of IP addresses excluded from website tracking for each of the specified report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetIPAddressExclusions', rsid_list = rsid_list)
 
     def GetIPObfuscation(self, rsid_list):
+        """
+        Retrieves the IP Address Obfuscation setting for each of the specified report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetIPObfuscation', rsid_list = rsid_list)
     
     def GetKeyVisitors(self, rsid_list):
+        """
+        Retrieves a list of key visitors for each of the specified report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetKeyVisitors', rsid_list = rsid_list)
     
     def GetListVariables(self, rsid_list):
+        """
+        Retrieves the list variables for the requested report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetListVariables', rsid_list = rsid_list)
     
     def GetLocalization(self, rsid_list):
+        """
+        Retrieves the localization (multi-byte character) settings for each of the specified report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetLocalization', rsid_list = rsid_list)
     
     def GetLogin(self, ):
@@ -155,28 +257,98 @@ class AdobeAnalytics:
     def GetLogins(self, ):
         return self.__callapi('Permissions.GetLogins', )
     
+    def GetMarketingChannelCosts(self, rsid_list):
+        """
+        Returns the currently defined Marketing Channel costs for the specified report suite.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
+        return self.__callapi('ReportSuite.GetMarketingChannelCosts', rsid_list = rsid_list)
+    
     def GetMarketingChannelExpiration(self, rsid_list):
+        """
+        Returns the currently defined Marketing Channel expiration dates for the specified report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetMarketingChannelExpiration', rsid_list = rsid_list)
     
     def GetMarketingChannelRules(self, rsid_list):
+        """
+        Returns the currently defined Marketing Channel rules for the specified report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetMarketingChannelRules', rsid_list = rsid_list)
     
     def GetMarketingChannels(self, rsid_list):
+        """
+        Returns the currently defined Marketing Channels for the specified report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetMarketingChannels',  rsid_list = rsid_list)
     
     def GetMetrics(self, ):
         return self.__callapi('Report.GetMetrics', )
     
     def GetMobileAppReporting(self, rsid_list):
+        """
+        Retrieves the Mobile Application Tracking settings for the requested report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetMobileAppReporting', rsid_list = rsid_list)
     
     def GetPaidSearchDetection(self, rsid_list):
+        """
+        Retrieves the paid search settings for each of the specified report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetPaidSearchDetection', rsid_list = rsid_list)
+
+    def GetPermanentTraffic(self, rsid_list):
+        """
+        Retrieves the permanent traffic settings for each of the specified report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
+        return self.__callapi('ReportSuite.GetPermanentTraffic', rsid_list = rsid_list)
+        
+    def GetProcessingStatus(self, rsid_list):
+        """
+        Returns processing status for the given report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
+        return self.__callapi('ReportSuite.GetPermanentTraffic', rsid_list = rsid_list)
+    
     
     def GetPrivacySettings(self, rsid_list):
+        """
+        Returns the activation date for the report suite(s) specified.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetPrivacySettings', rsid_list = rsid_list)
     
     def GetProps(self, rsid_list):
+        """
+        Retrieves the props (traffic variables) for the specified report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetProps', rsid_list = rsid_list)
     
     def GetQueue(self ):
@@ -186,6 +358,12 @@ class AdobeAnalytics:
         return self.__callapi('Company.GetReportSuites', )
     
     def GetRealTimeSettings(self, rsid_list):
+        """
+        Returns the metrics that are configured to provide real time data.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetRealTimeSettings', rsid_list = rsid_list)
     
     def GetReportDescription(self, ):
@@ -196,35 +374,94 @@ class AdobeAnalytics:
         return self.__callapi('Company.GetReportSuites')
     
     def GetScheduledSpike(self, rsid_list):
+        """
+        Retrieves the scheduled traffic increase settings for the specified report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetScheduledSpike', rsid_list = rsid_list)
 
     def GetSegments(self, rsid_list):
+        """
+        Retrieves the segments that are available in one or more report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetSegments', rsid_list = rsid_list)
     
     def GetSiteTitle(self, rsid_list):
+        """
+        Retrieves the site title (friendly name) for each of the specified report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetSiteTitle', rsid_list = rsid_list)
     
     def GetEvents(self, rsid_list):
+        """
+        Retrieves the success events for each of the specified report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetEvents', rsid_list = rsid_list)
     
     def GetTemplate(self, rsid_list):
+        """
+        Retrieves the creation template for each of the specified report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetTemplate', rsid_list = rsid_list)
     
     def GetTimeZone(self, rsid_list):
+        """
+        Retrieves the Time Zone setting for each of the specified report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetTimeZone', rsid_list = rsid_list)
     
     def GetTrackingServer(self, rsid_list):
+        """
+        Returns the activation date for the report suite(s) specified.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('Company.GetTrackingServer', rsid_list = rsid_list)
     
     def GetTransactionEnabled(self, rsid_list):
+        """
+        Retrieves the transaction ids storage enable for the requested report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetTransactionEnabled', rsid_list = rsid_list)
     
     def GetUniqueVisitorVariable(self, rsid_list):
+        """
+        Retrieves the unique visitor variable setting for the specified report suites.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetUniqueVisitorVariable', rsid_list = rsid_list)
     
     def GetVersionAccess(self):
         return self.__callapi('Company.GetVersionAccess', )
     
     def GetVideoSettings(self, rsid_list):
+        """
+        Retrieves video measurement settings.
+        
+        Keyword arguments: 
+        rsid_list -- Report suites to evaluate
+        """
         return self.__callapi('ReportSuite.GetVideoSettings', rsid_list = rsid_list)
-
