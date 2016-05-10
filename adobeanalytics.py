@@ -464,4 +464,4 @@ class AdobeAnalytics:
         Keyword arguments: 
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetVideoSettings', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetVideoSettings', rsid_list = rsid_list)    
