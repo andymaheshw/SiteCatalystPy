@@ -474,5 +474,4 @@ class AdobeAnalytics:
         report_id -- report to Cancel
         """
         js = '{"reportID": %s}' % (report_id)
-        return self.__callapi('Report.Cancel', js)
-    
+        return self.__callapi('Report.Cancel', js=js)  
