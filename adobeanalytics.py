@@ -464,4 +464,14 @@ class AdobeAnalytics:
         Keyword arguments: 
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetVideoSettings', rsid_list = rsid_list)    
+        return self.__callapi('ReportSuite.GetVideoSettings', rsid_list = rsid_list)  
+
+    def CancelReport(self, report_id):
+        """
+        Cancels a report
+
+        Keyword arguments:
+        report_id -- report to Cancel
+        """
+        js = '{"reportID": %s}' % (report_id)
+        return self.__callapi('Report.Cancel', js=js)  
