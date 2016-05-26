@@ -103,7 +103,7 @@ class AdobeAnalytics:
         report_description = {}
         if folder_limit:
             report_description["folder_limit"] = folder_limit
-        if folder_offset: 
+        if folder_offset:
             report_description["folder_offset"] = folder_limit
 
         return self.__callapi('Bookmark.GetBookmarks', report_description=report_description)
@@ -488,3 +488,14 @@ class AdobeAnalytics:
         """
         js = '{"reportID": %s}' % (report_id)
         return self.__callapi('Report.Cancel', js=js)
+
+    def ValidateReport(self, report_description, interval_seconds=0,max_attempts=1):
+        """
+        Checks if report is valid
+
+        Keyword arguments:
+        report_description  -- json of the report
+        interval_seconds -- how long to wait
+        max_attempts -- how
+        """
+        return self.__callapi('Report.Validate', report_description=report_description)
