@@ -464,16 +464,4 @@ class AdobeAnalytics:
         Keyword arguments: 
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetVideoSettings', rsid_list = rsid_list)
-
-    def ValidateReport(self, report_description, interval_seconds=0,max_attempts=1):
-        """
-        Checks if report is valid
-        
-        Keyword arguments: 
-        report_description  -- json of the report
-        interval_seconds -- how long to wait
-        max_attempts -- how 
-        """
-        return self.__callapi('Report.Validate', report_description=report_description)
-
+        return self.__callapi('ReportSuite.GetVideoSettings', rsid_list = rsid_list)    
