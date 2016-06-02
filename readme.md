@@ -1,6 +1,6 @@
 AdobeAnalytics
 =========================
-![](https://travis-ci.org/andymaheshw/AdobeAnalytics.svg?branch=master)
+[![Build Status](https://travis-ci.org/andymaheshw/AdobeAnalytics.svg?branch=master)](https://travis-ci.org/andymaheshw/AdobeAnalytics)
 
 ## Synopsis
 
