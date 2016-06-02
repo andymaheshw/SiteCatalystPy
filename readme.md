@@ -1,5 +1,6 @@
 AdobeAnalytics
 =========================
+![](https://travis-ci.org/andymaheshw/AdobeAnalytics.svg?branch=master)
 
 ## Synopsis
 
