@@ -342,8 +342,20 @@ class AdobeAnalytics:
         """
         return self.__callapi('ReportSuite.GetMarketingChannels',  rsid_list = rsid_list)
 
-    def GetMetrics(self, ):
-        return self.__callapi('Report.GetMetrics', )
+    def GetMetrics(self, rsid_list, elements=[], metrics=metrics):
+        """
+        Get Valid Metrics for a Report Suite
+
+       Keyword arguments:
+       rsid_list -- Single report suite id, or character vector of report suite ids
+       metrics -- list of existing metrics you want to use in combination with an additional metric
+       elements -- list of existing elements you want to use in combination with an additional metric
+
+        """
+        result = {}
+        for report in rsid_list:
+            result[report] = self.__callapi('Report.GetMetrics', reportSuiteID=report, existingElements=elements, existingMetrics=metrics)
+        return result
 
     def GetMobileAppReporting(self, rsid_list):
         """
@@ -403,8 +415,31 @@ class AdobeAnalytics:
     def GetQueue(self ):
         return self.__callapi('Report.GetQueue')
 
-    def GetRealTimeReport(self, ):
-        return self.__callapi('Company.GetReportSuites', )
+    def GetRealTimeReport(self,  rsid_list, metrics = [], elements=[], date_granularity=5, 
+                              date_from="1 hour ago", date_to="now", sort_algorithm="mostpopular",
+                              floor_sensitivity=.25, first_rank_period=0, 
+                              algorithm_argument="linear", everything_else=TRUE,
+                              selected=[]):
+        """
+        Function to access the Adobe Analytics Real-Time API v1.4. 
+        This API provides the ability for reporting up to the most recent minute. 
+        This API is best used at 15-30 second intervals (or longer).
+
+        keyword arguments:
+        rsid_list -- Report Suite
+        metrics -- Report metric
+        elements -- Report breakdowns
+        date_granularity -- Report Granularity. Defaults to 5 minutes
+        date_from -- Report starting time. Defaults to "1 hour ago"
+        date_to -- Report end time. Defaults to "now"
+        sort_algorithm -- Sorting algorithm. Defaults to "mostpopular"
+        floor_sensitivity -- Floor sensitivity. Defaults to .25
+        first_rank_period -- First Ranking Period. Defaults to 0
+        algorithm_argument -- Ranking algorithm. Defaults to "linear"
+        everything_else -- Provide counts for elements not returned as 'top'
+        selected -- Selected items for a given element (only works for a single element)
+        """
+        return self.__callapi('Report.Run', rsid_list=rsid_list, metrics=metrics, elements=[] )
 
     def GetRealTimeSettings(self, rsid_list):
         """
@@ -415,8 +450,16 @@ class AdobeAnalytics:
         """
         return self.__callapi('ReportSuite.GetRealTimeSettings', rsid_list = rsid_list)
 
-    def GetReportDescription(self, ):
-        return self.__callapi('Bookmark.GetReportDescription', )
+    def GetReportDescription(self, bookmark ):
+        """
+        Get report description for a specific bookmark_id
+
+        keyword arguments:
+        bookmark -- Bookmark ID
+
+        """
+
+        return self.__callapi('Bookmark.GetReportDescription', bookmark_id=bookmark)
 
     def GetReportSuites(self):
         """Returns all report suites available to user from a given company."""
@@ -476,14 +519,14 @@ class AdobeAnalytics:
         """
         return self.__callapi('ReportSuite.GetTimeZone', rsid_list = rsid_list)
 
-    def GetTrackingServer(self, rsid_list):
+    def GetTrackingServer(self, rsid):
         """
         Returns the activation date for the report suite(s) specified.
 
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('Company.GetTrackingServer', rsid_list = rsid_list)
+        return self.__callapi('Company.GetTrackingServer', rsid = rsid)
 
     def GetTransactionEnabled(self, rsid_list):
         """
