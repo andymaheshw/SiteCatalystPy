@@ -117,8 +117,14 @@ class AdobeAnalytics:
         """
         return self.__callapi('ReportSuite.GetCalculatedMetrics', rsid_list = rsid_list)
 
-    def GetClassifications(self, ):
-        return self.__callapi('ReportSuite.GetClassifications', )
+    def GetClassifications(self, rsid_list, element_list = []):
+        """
+        Retrieves a list of classifications (associated with the specified element) for each of the specified report suites.
+        
+        Keyword arguments:
+        rsid_list = Single report suite id or list of report suites
+        """
+        return self.__callapi('ReportSuite.GetClassifications',rsid_list = rsid_list, element_list=element_list)
 
     def GetCustomCalendar(self, rsid_list):
         """
@@ -168,8 +174,20 @@ class AdobeAnalytics:
         """
         return self.__callapi('ReportSuite.GetEcommerce', rsid_list = rsid_list)
 
-    def GetElements(self, ):
-        return self.__callapi('Report.GetElements', )
+    def GetElements(self, rsid_list, elements=[], metrics = []):
+        """
+       Get Valid Elements for a Report Suite
+
+       Keyword arguments:
+       rsid_list -- Single report suite id, or character vector of report suite ids
+       metrics -- list of existing metrics you want to use in combination with an additional metric
+       elements -- list of existing elements you want to use in combination with an additional metric
+
+        """
+        result = {}
+        for report in rsid_list:
+            result[report] = self.__callapi('Report.GetElements', reportSuiteID=report, existingElements=elements, existingMetrics=metrics)
+        return result
 
     def GetEndpoint(self, company):
         """
@@ -189,11 +207,29 @@ class AdobeAnalytics:
         """
         return self.__callapi('ReportSuite.GetEvars', rsid_list = rsid_list)
 
-    def GetFeed(self, ):
-        return self.__callapi('DataFeed.GetFeed', )
+    def GetFeed(self, feed_id):
+        """
+        Get Data Feed Detail for a specific feed
 
-    def GetFeeds(self, ):
-        return self.__callapi('DataFeed.GetFeeds', )
+        Keyword arguments:
+        feed_id -- Data Feed ID
+        """
+        return self.__callapi('DataFeed.GetFeed',feed_id=feed_id)
+
+    def GetFeeds(self, rsid_list, start_time="", end_time="", status=[]):
+        """
+        Get Data Feed Detail for a Report Suite(s)
+
+        Keyword arguments:
+        rsid_list -- Report suite id (or list of report suite ids)
+        start_time -- Beginning of time period you want to check
+        end_time -- End of time period you want to check
+        status -- Character vector/list of statuses to filter by 
+
+        Example:
+        feeds2 = GetFeeds("zwitchdev", "2014-12-02 05:00:00", "2014-12-03 05:00:00")
+        """
+        return self.__callapi('DataFeed.GetFeeds', rsid_list=rsid_list, status=status, start_time="", end_time="")
 
     def GetFunctions(self, ):
         return self.__callapi('CalculatedMetrics.GetFunctions', )
