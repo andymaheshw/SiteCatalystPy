@@ -1,5 +1,8 @@
-def func(x):
-    return x + 1
+import os
+from AdobeAnalytics import adobeanalytics
 
+aa = adobeanalytics.AdobeAnalytics(user_name=os.environ['USER'], shared_secret=os.environ['SECRET'], debug = True)
+
+#Test 1
 def test_answer():
-    assert func(4) == 5
+	assert isinstance(aa.GetActivation(rsid_list = "zwitchdev"), list) == True
