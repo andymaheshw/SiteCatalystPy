@@ -342,7 +342,7 @@ class AdobeAnalytics:
         """
         return self.__callapi('ReportSuite.GetMarketingChannels',  rsid_list = rsid_list)
 
-    def GetMetrics(self, rsid_list, elements=[], metrics=metrics):
+    def GetMetrics(self, rsid_list, elements=[], metrics=[]):
         """
         Get Valid Metrics for a Report Suite
 
@@ -418,7 +418,7 @@ class AdobeAnalytics:
     def GetRealTimeReport(self,  rsid_list, metrics = [], elements=[], date_granularity=5, 
                               date_from="1 hour ago", date_to="now", sort_algorithm="mostpopular",
                               floor_sensitivity=.25, first_rank_period=0, 
-                              algorithm_argument="linear", everything_else=TRUE,
+                              algorithm_argument="linear", everything_else=True,
                               selected=[]):
         """
         Function to access the Adobe Analytics Real-Time API v1.4. 
