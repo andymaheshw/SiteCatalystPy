@@ -45,6 +45,11 @@ class AdobeAnalytics:
         """
         Calls the Adobe Analytics API at a given endpoint and variable arguments
         """
+
+        #Automatically convert an rsid_list string type to list as required by API
+        if "rsid_list" in kwargs and isinstance(kwargs["rsid_list"], str):
+            kwargs["rsid_list"] = [kwargs["rsid_list"]]
+
         header = self.__buildheader()
         if verb == "GET":
             req = requests.get('%s?method=%s' % (self.__api_url, endpoint), params=json.dumps(kwargs), headers=header)
@@ -342,7 +347,7 @@ class AdobeAnalytics:
         """
         return self.__callapi('ReportSuite.GetMarketingChannels',  rsid_list = rsid_list)
 
-    def GetMetrics(self, rsid_list, elements=[], metrics=metrics):
+    def GetMetrics(self, rsid_list, elements=[], metrics=[]):
         """
         Get Valid Metrics for a Report Suite
 
@@ -418,7 +423,7 @@ class AdobeAnalytics:
     def GetRealTimeReport(self,  rsid_list, metrics = [], elements=[], date_granularity=5, 
                               date_from="1 hour ago", date_to="now", sort_algorithm="mostpopular",
                               floor_sensitivity=.25, first_rank_period=0, 
-                              algorithm_argument="linear", everything_else=TRUE,
+                              algorithm_argument="linear", everything_else=True,
                               selected=[]):
         """
         Function to access the Adobe Analytics Real-Time API v1.4. 
