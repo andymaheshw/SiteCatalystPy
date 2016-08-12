@@ -45,6 +45,11 @@ class AdobeAnalytics:
         """
         Calls the Adobe Analytics API at a given endpoint and variable arguments
         """
+
+        #Automatically convert an rsid_list string type to list as required by API
+        if rsid_list in kwargs & type(rsid_list) = 'str':
+            kwargs["rsid_list"] = [kwargs["rsid_list"]]
+
         header = self.__buildheader()
         if verb == "GET":
             req = requests.get('%s?method=%s' % (self.__api_url, endpoint), params=json.dumps(kwargs), headers=header)
