@@ -47,7 +47,7 @@ class AdobeAnalytics:
         """
 
         #Automatically convert an rsid_list string type to list as required by API
-        if "rsid_list" in kwargs & type(kwargs["rsid_list"]) == 'str':
+        if "rsid_list" in kwargs and type(kwargs["rsid_list"]) == 'str':
             kwargs["rsid_list"] = [kwargs["rsid_list"]]
 
         header = self.__buildheader()
