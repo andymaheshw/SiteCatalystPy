@@ -21,7 +21,7 @@ kw = {
     'name': 'AdobeAnalytics',
     'version': '0.1.0',
     'description': 'A Python wrapper for the Adobe Analytics API',
-    'author': 'Andy Maheshwari',
+    'author': 'Andy Maheshwari, Randy Zwitch',
     'author_email': 'andymaheshw@gmail.com',
     'license': 'MIT License',
     'url': 'https://github.com/andymaheshw/AdobeAnalytics',
