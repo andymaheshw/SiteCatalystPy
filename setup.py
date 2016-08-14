@@ -25,11 +25,15 @@ def read(*names, **kwargs):
 setup(
     name='pyadobemc',
     version='0.1.0',
-    license=‘MIT License’,
-    'description': 'A Python wrapper for the Adobe Analytics API',
-    author='Andy Maheshwari, Randy Zwitch',,
-    author_email='andymaheshw@gmail.com',
-    url='https://github.com/andymaheshw/AdobeAnalytics',
+    license='BSD',
+    description='An example package. Generated with cookiecutter-pylibrary.',
+    long_description='%s\n%s' % (
+        re.compile('^.. start-badges.*^.. end-badges', re.M | re.S).sub('', read('README.rst')),
+        re.sub(':[a-z]+:`~?(.*?)`', r'``\1``', read('CHANGELOG.rst'))
+    ),
+    author='Randy Zwitch',
+    author_email='rzwitch@gmail.com',
+    url='https://github.com/randyzwitch/python-pyadobemc',
     packages=find_packages('src'),
     package_dir={'': 'src'},
     py_modules=[splitext(basename(path))[0] for path in glob('src/*.py')],
@@ -37,9 +41,9 @@ setup(
     zip_safe=False,
     classifiers=[
         # complete classifier list: http://pypi.python.org/pypi?%3Aaction=list_classifiers
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: MIT License',
+        'License :: OSI Approved :: BSD License',
         'Operating System :: Unix',
         'Operating System :: POSIX',
         'Operating System :: Microsoft :: Windows',
@@ -51,6 +55,10 @@ setup(
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy',
+        # uncomment if you test on these interpreters:
+        # 'Programming Language :: Python :: Implementation :: IronPython',
+        # 'Programming Language :: Python :: Implementation :: Jython',
+        # 'Programming Language :: Python :: Implementation :: Stackless',
         'Topic :: Utilities',
     ],
     keywords=[
