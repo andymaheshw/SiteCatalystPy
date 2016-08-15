@@ -27,10 +27,7 @@ setup(
     version='0.1.0',
     license='BSD',
     description='An example package. Generated with cookiecutter-pylibrary.',
-    long_description='%s\n%s' % (
-        re.compile('^.. start-badges.*^.. end-badges', re.M | re.S).sub('', read('README.rst')),
-        re.sub(':[a-z]+:`~?(.*?)`', r'``\1``', read('CHANGELOG.rst'))
-    ),
+    long_description='An example package. Generated with cookiecutter-pylibrary.',
     author='Randy Zwitch',
     author_email='rzwitch@gmail.com',
     url='https://github.com/randyzwitch/python-pyadobemc',
