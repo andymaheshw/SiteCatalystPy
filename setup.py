@@ -1,33 +1,75 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python
+# -*- encoding: utf-8 -*-
+from __future__ import absolute_import
+from __future__ import print_function
 
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+import io
+import re
+from glob import glob
+from os.path import basename
+from os.path import dirname
+from os.path import join
+from os.path import splitext
 
-classifiers = (
-    'Development Status :: 4 - Beta',
-    'Programming Language :: Python :: 2.7',
-    'Programming Language :: Python :: 3.2',
-    'Programming Language :: Python :: 3.3',
-    'Programming Language :: Python :: 3.4',
-    'Programming Language :: Python :: 3.5',
-    'License :: OSI Approved :: MIT License',
+from setuptools import find_packages
+from setuptools import setup
+
+
+def read(*names, **kwargs):
+    return io.open(
+        join(dirname(__file__), *names),
+        encoding=kwargs.get('encoding', 'utf8')
+    ).read()
+
+
+setup(
+    name='pyadobemc',
+    version='0.1.0',
+    license='BSD',
+    description='An example package. Generated with cookiecutter-pylibrary.',
+    long_description='%s\n%s' % (
+        re.compile('^.. start-badges.*^.. end-badges', re.M | re.S).sub('', read('README.rst')),
+        re.sub(':[a-z]+:`~?(.*?)`', r'``\1``', read('CHANGELOG.rst'))
+    ),
+    author='Randy Zwitch',
+    author_email='rzwitch@gmail.com',
+    url='https://github.com/randyzwitch/python-pyadobemc',
+    packages=find_packages('src'),
+    package_dir={'': 'src'},
+    py_modules=[splitext(basename(path))[0] for path in glob('src/*.py')],
+    include_package_data=True,
+    zip_safe=False,
+    classifiers=[
+        # complete classifier list: http://pypi.python.org/pypi?%3Aaction=list_classifiers
+        'Development Status :: 5 - Production/Stable',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: BSD License',
+        'Operating System :: Unix',
+        'Operating System :: POSIX',
+        'Operating System :: Microsoft :: Windows',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: Implementation :: CPython',
+        'Programming Language :: Python :: Implementation :: PyPy',
+        # uncomment if you test on these interpreters:
+        # 'Programming Language :: Python :: Implementation :: IronPython',
+        # 'Programming Language :: Python :: Implementation :: Jython',
+        # 'Programming Language :: Python :: Implementation :: Stackless',
+        'Topic :: Utilities',
+    ],
+    keywords=[
+        'digital analytics'
+    ],
+    install_requires=[
+        'pandas', 'python-dateutil', 'pytz', 'requests', 'six'
+    ],
+    extras_require={
+        # eg:
+        #   'rst': ['docutils>=0.11'],
+        #   ':python_version=="2.6"': ['argparse'],
+    },
 )
-
-required = ('pandas', 'python-dateutil', 'pytz', 'requests', 'six')
-
-kw = {
-    'name': 'AdobeAnalytics',
-    'version': '0.1.0',
-    'description': 'A Python wrapper for the Adobe Analytics API',
-    'author': 'Andy Maheshwari, Randy Zwitch',
-    'author_email': 'andymaheshw@gmail.com',
-    'license': 'MIT License',
-    'url': 'https://github.com/andymaheshw/AdobeAnalytics',
-    'keywords': 'digital analytics',
-    'install_requires': required,
-    'zip_safe': True,
-}
-
-setup(**kw)

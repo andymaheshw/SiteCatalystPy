@@ -4,6 +4,7 @@ Created on Sun Mar 06 00:27:21 2016
 @author: maheshwa
 """
 
+from __future__ import print_function
 from datetime import date, timedelta
 import requests, time, binascii, hashlib, json, urllib #adding hashlib
 import pandas as pd
@@ -36,7 +37,7 @@ class AdobeAnalytics:
         nonce = str(time.time())
         base64nonce = binascii.b2a_base64(binascii.a2b_qp(nonce))
         created_date = time.strftime("%Y-%m-%dT%H:%M:%SZ",  time.gmtime())
-        sha_object = hashlib.sha1(nonce + created_date + '%s' % (self.__shared_secret))
+        sha_object = hashlib.sha1((nonce + created_date + '%s' % (self.__shared_secret)).encode('utf-8'))
         password_64 = binascii.b2a_base64(sha_object.digest())
         X_str = 'UsernameToken Username="%s", PasswordDigest="%s", Nonce="%s", Created="%s"' % ('%s:%s' % (self.__user_name, self.__company), password_64.strip(), base64nonce.strip(), created_date)
         return {'X-WSSE':X_str}
@@ -54,11 +55,11 @@ class AdobeAnalytics:
         if verb == "GET":
             req = requests.get('%s?method=%s' % (self.__api_url, endpoint), params=json.dumps(kwargs), headers=header)
             if self.__debug:
-                print json.dumps(kwargs)
+                print(json.dumps(kwargs))
         else:
             req = requests.post('%s?method=%s' % (self.__api_url, endpoint), data=json.dumps(kwargs), headers=header)
             if self.__debug:
-                print json.dumps(kwargs)
+                print(json.dumps(kwargs))
         return req.json()
 
     def GetActivation(self, rsid_list):
@@ -125,7 +126,7 @@ class AdobeAnalytics:
     def GetClassifications(self, rsid_list, element_list = []):
         """
         Retrieves a list of classifications (associated with the specified element) for each of the specified report suites.
-        
+
         Keyword arguments:
         rsid_list = Single report suite id or list of report suites
         """
@@ -229,7 +230,7 @@ class AdobeAnalytics:
         rsid_list -- Report suite id (or list of report suite ids)
         start_time -- Beginning of time period you want to check
         end_time -- End of time period you want to check
-        status -- Character vector/list of statuses to filter by 
+        status -- Character vector/list of statuses to filter by
 
         Example:
         feeds2 = GetFeeds("zwitchdev", "2014-12-02 05:00:00", "2014-12-03 05:00:00")
@@ -420,14 +421,14 @@ class AdobeAnalytics:
     def GetQueue(self ):
         return self.__callapi('Report.GetQueue')
 
-    def GetRealTimeReport(self,  rsid_list, metrics = [], elements=[], date_granularity=5, 
+    def GetRealTimeReport(self,  rsid_list, metrics = [], elements=[], date_granularity=5,
                               date_from="1 hour ago", date_to="now", sort_algorithm="mostpopular",
-                              floor_sensitivity=.25, first_rank_period=0, 
+                              floor_sensitivity=.25, first_rank_period=0,
                               algorithm_argument="linear", everything_else=True,
                               selected=[]):
         """
-        Function to access the Adobe Analytics Real-Time API v1.4. 
-        This API provides the ability for reporting up to the most recent minute. 
+        Function to access the Adobe Analytics Real-Time API v1.4.
+        This API provides the ability for reporting up to the most recent minute.
         This API is best used at 15-30 second intervals (or longer).
 
         keyword arguments:
