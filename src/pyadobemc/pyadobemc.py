@@ -5,14 +5,17 @@ Created on Sun Mar 06 00:27:21 2016
 """
 
 from __future__ import print_function
-from datetime import date, timedelta
-import requests, time, binascii, hashlib, json, urllib #adding hashlib
-import pandas as pd
+import requests
+import time
+import binascii
+import hashlib
+import json
+
 
 # Authentication
 class AdobeAnalytics:
 
-    def __init__(self, user_name, shared_secret, endpoint='', debug = False):
+    def __init__(self, user_name, shared_secret, endpoint='', debug=False):
         """
         Entry point for making authenticated API calls to the Adobe Report API's
         """
@@ -42,7 +45,7 @@ class AdobeAnalytics:
         X_str = 'UsernameToken Username="%s", PasswordDigest="%s", Nonce="%s", Created="%s"' % ('%s:%s' % (self.__user_name, self.__company), password_64.strip(), base64nonce.strip(), created_date)
         return {'X-WSSE':X_str}
 
-    def __callapi(self, endpoint, verb = "POST", **kwargs):
+    def __callapi(self, endpoint, verb="POST", **kwargs):
         """
         Calls the Adobe Analytics API at a given endpoint and variable arguments
         """
@@ -180,7 +183,7 @@ class AdobeAnalytics:
         """
         return self.__callapi('ReportSuite.GetEcommerce', rsid_list = rsid_list)
 
-    def GetElements(self, rsid_list, elements=[], metrics = []):
+    def GetElements(self, rsid_list, elements=[], metrics =[]):
         """
        Get Valid Elements for a Report Suite
 
@@ -418,7 +421,7 @@ class AdobeAnalytics:
         """
         return self.__callapi('ReportSuite.GetProps', rsid_list = rsid_list)
 
-    def GetQueue(self ):
+    def GetQueue(self, ):
         return self.__callapi('Report.GetQueue')
 
     def GetRealTimeReport(self,  rsid_list, metrics = [], elements=[], date_granularity=5,
@@ -445,7 +448,7 @@ class AdobeAnalytics:
         everything_else -- Provide counts for elements not returned as 'top'
         selected -- Selected items for a given element (only works for a single element)
         """
-        return self.__callapi('Report.Run', rsid_list=rsid_list, metrics=metrics, elements=[] )
+        return self.__callapi('Report.Run', rsid_list=rsid_list, metrics=metrics, elements=[])
 
     def GetRealTimeSettings(self, rsid_list):
         """
@@ -454,9 +457,9 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetRealTimeSettings', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetRealTimeSettings', rsid_list=rsid_list)
 
-    def GetReportDescription(self, bookmark ):
+    def GetReportDescription(self, bookmark):
         """
         Get report description for a specific bookmark_id
 
@@ -478,7 +481,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetScheduledSpike', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetScheduledSpike', rsid_list=rsid_list)
 
     def GetSegments(self, rsid_list):
         """
@@ -487,7 +490,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetSegments', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetSegments', rsid_list=rsid_list)
 
     def GetSiteTitle(self, rsid_list):
         """
@@ -496,7 +499,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetSiteTitle', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetSiteTitle', rsid_list=rsid_list)
 
     def GetEvents(self, rsid_list):
         """
@@ -505,7 +508,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetEvents', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetEvents', rsid_list=rsid_list)
 
     def GetTemplate(self, rsid_list):
         """
@@ -514,7 +517,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetTemplate', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetTemplate', rsid_list=rsid_list)
 
     def GetTimeZone(self, rsid_list):
         """
@@ -523,7 +526,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetTimeZone', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetTimeZone', rsid_list=rsid_list)
 
     def GetTrackingServer(self, rsid):
         """
@@ -532,7 +535,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('Company.GetTrackingServer', rsid = rsid)
+        return self.__callapi('Company.GetTrackingServer', rsid=rsid)
 
     def GetTransactionEnabled(self, rsid_list):
         """
@@ -541,7 +544,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetTransactionEnabled', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetTransactionEnabled', rsid_list=rsid_list)
 
     def GetUniqueVisitorVariable(self, rsid_list):
         """
@@ -550,7 +553,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetUniqueVisitorVariable', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetUniqueVisitorVariable', rsid_list=rsid_list)
 
     def GetVersionAccess(self):
         return self.__callapi('Company.GetVersionAccess', )
@@ -562,7 +565,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetVideoSettings', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetVideoSettings', rsid_list=rsid_list)
 
     def CancelReport(self, report_id):
         """
@@ -574,7 +577,7 @@ class AdobeAnalytics:
         js = '{"reportID": %s}' % (report_id)
         return self.__callapi('Report.Cancel', js=js)
 
-    def ValidateReport(self, report_description, interval_seconds=0,max_attempts=1):
+    def ValidateReport(self, report_description, interval_seconds=0, max_attempts=1):
         """
         Checks if report is valid
 
