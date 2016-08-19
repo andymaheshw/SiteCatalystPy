@@ -1,13 +1,40 @@
 language: python
-python:
-  - "2.7"
-  - "3.2"
-  - "3.3"
-  - "3.4"
-  - "3.5"
-  - "3.5-dev" # 3.5 development branch
-  - "nightly" # currently points to 3.6-dev
-# command to install dependencies
-install: "pip install -r requirements.txt"
-# command to run tests
-script: nosetests
+python: '3.5'
+sudo: false
+env:
+  global:
+  - LD_PRELOAD=/lib/x86_64-linux-gnu/libSegFault.so
+  - SEGFAULT_SIGNALS=all
+  - secure: k2FTRLJPAjbVUhxJ7mspOMiySl7JHcXtZHwhVk23xf10ADJ7sAXZszT1k19va1wv/DBPsxc74/WmwZar3jQhZxqUbv3Dqj7mGVpDkzj0KMsFUT779W9ZnKLtrKNG5sRom3hrydVDxCZM5mGXvQo2gaWsFmS5tLzWH1faf9gpDkZBooOr3LJxrjWwxNntWn4Po9Hqwwt+53lJH1yHr4QWhqV5/MIYMBVRwvCT1OrqWtHivjIGS6rGejDkff1MbSVJUZNtZwqD3KZLOjLBXgldN7rbC5/53p2VVrobOzgDHFqJ9isG0Z31DB3yMHUL8B3zhUr/sMpZ4rrFdTu6YgCeN5gIz/oMG5PFGq63LNowr00nbTsO0O8lvuylN6JtKfz0BFCR3IRLue1KvzthNe+9F4susUflGCrJOzyFRXQzuht87BPADoCmxCwWiFvNS3kGDeSBT4tIW2meeApsmvaKfduug4hlWhLakbp1GNtKCCtb/HIMqZXM3KPJmYVH295ivIsGz8UdTw95i1i+4zQkRmt01LwdB6E4Z8Cz4r9em7MemQfAb2L+iWjjO28mbkL3IbqAQfwnGUlBi7KQOeF99o+7wPobZZu7dI/HXndSutsNjH5ULaCdq/rVwmGqHMUeeaZjpYeSbN5RFNkSDCr9uTEIcdRFxwltzCmg585GcrU=
+  - secure: oF6CWfj7AkkE99vMeK5ksr373mM5ygIC1LVD5uGfK+DNMIT9+KX6y2+Bc2O6PZDYcdtMEA1Ru4l5DBzG2/2T67o12UaIv71PRX5AUDZ4dIgMiAMVfXgUz3jdA+4j+j4lPD0cbTemzNNGgg9a3nf+3E+Mrm47F28rImZthj+1NQhxS/VeQi3iwJwCimTaz10l0JciWUCwnPC+Z+i6hLYi/kkdgxpr/sapDNskkUddBbfiYR3r0I3P+f+D7bFxXZEyQfTrcX4hvYVRnakOYVvbmvmW5DpnfsulDWnZAVnb7A1PJJXBMzslsgDk3un5+j4jOmczqSFTKkh9jPfpy3euaFPMAX1mkV828JwdtnwEW0iaKUDfGrbrTg4L9/hFAMyYIaTkNX7GyjP8R8JavpXyVuycgmfkC6bmOTa27O6w9aYfvVaUwyqytXS0J8JvCmJfKBQGgIaSse8bidLAYEvpyX9fO4Ms3yCZdvl4FZh/R+FMCF2QFNttxu5/Dpj3KaomU01kHdNy5zPJC0yTY9JNs2v7vpWV0hfieVgX05luVwnfrSk4Ylv/3gR8I+qq8C/oTvgLtgGrtqpFnsUDcvfXC+ZrBf/gZL4+TdjaloCLLi11Om2f0uATu0TTpkOSbTDDjdIklxzAaik95TJVcectJzVxpPEYMPpRPz9ib1/IdVI=
+  matrix:
+  - TOXENV=check
+  - TOXENV=py27
+  - TOXENV=py33
+  - TOXENV=py34
+  - TOXENV=py35
+  - TOXENV=pypy
+before_install:
+- python --version
+- uname -a
+- lsb_release -a
+install:
+- pip install tox
+- virtualenv --version
+- easy_install --version
+- pip --version
+- tox --version
+script:
+- tox -v
+after_failure:
+- more .tox/log/* | cat
+- more .tox/*/log/* | cat
+before_cache:
+- rm -rf $HOME/.cache/pip/log
+cache:
+  directories:
+  - $HOME/.cache/pip
+notifications:
+  email:
+    on_success: never
+    on_failure: always
