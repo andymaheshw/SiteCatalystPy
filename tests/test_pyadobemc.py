@@ -2,7 +2,14 @@ import os
 import pyadobemc
 
 def test_main():
-	#assert pyadobemc  # use your library here
+
+	'''
+	Tests generally test for the presense of a specific key, which tests not
+	only that the API was accessed but the expected answer structure was returned.
+	Tests don't test that a certain answer was returned, as this can vary based
+	on changing admin settings.
+	'''
+
 	aa = pyadobemc.AdobeAnalytics(user_name=os.environ['USER'], shared_secret=os.environ['SECRET'])
 
 	assert isinstance(aa.GetActivation(rsid_list = "zwitchdev"), list)
@@ -42,72 +49,72 @@ def test_main():
 
 	assert aa.GetGeoSegmentation(rsid_list = "zwitchdev")[0]["geo_segmentation"]
 
-	assert aa.GetGroups()
+	assert "group_description" in aa.GetGroups()[0]
 
-	assert aa.GetInternalURLFilters(rsid_list = "zwitchdev")
+	assert "randyzwitch.com" in aa.GetInternalURLFilters(rsid_list = "zwitchdev")[0]["internal_url_filters"]
 
-	assert aa.GetIPAddressExclusions(rsid_list = "zwitchdev")
+	assert "ip_address_exclusions" in aa.GetIPAddressExclusions(rsid_list = "zwitchdev")[0]
 
-	assert aa.GetIPObfuscation(rsid_list = "zwitchdev")
+	assert "ip_obfuscation" in aa.GetIPObfuscation(rsid_list = "zwitchdev")[0]
 
-	assert aa.GetKeyVisitors(rsid_list = "zwitchdev")
+	assert "key_visitors" in aa.GetKeyVisitors(rsid_list = "zwitchdev")[0]
 
-	assert aa.GetListVariables(rsid_list = "zwitchdev")
+	assert "list_variables" in aa.GetListVariables(rsid_list = "zwitchdev")[0]
 
-	assert aa.GetLocalization(rsid_list = "zwitchdev")
+	assert aa.GetLocalization(rsid_list = "zwitchdev")[0]["localization"]
 
-	assert aa.GetLogin()
+	assert aa.GetLogin()["first_name"] == "Randy"
 
-	assert aa.GetLogins()
+	assert "email" in aa.GetLogins()[0]
 
 	assert aa.GetMarketingChannelExpiration(rsid_list = "zwitchdev")
 
-	assert aa.GetMarketingChannelRules(rsid_list = "zwitchdev")
+	assert "days" in aa.GetMarketingChannelRules(rsid_list = "zwitchdev")[0]
 
 	#Fail
 	#aa.GetMetrics(rsid_list = "zwitchdev")
 
-	assert aa.GetMobileAppReporting(rsid_list = "zwitchdev")
+	assert aa.GetMobileAppReporting(rsid_list = "zwitchdev")["allow_configuration"]
 
-	assert aa.GetPaidSearchDetection(rsid_list = "zwitchdev")
+	assert "paid_search_detection" in aa.GetPaidSearchDetection(rsid_list = "zwitchdev")[0]
 
-	assert aa.GetPermanentTraffic(rsid_list = "zwitchdev")
+	assert "permanent_traffic" in aa.GetPermanentTraffic(rsid_list = "zwitchdev")[0]
 
-	assert aa.GetPrivacySettings(rsid_list = "zwitchdev")
+	assert "privacy_settings" in aa.GetPrivacySettings(rsid_list = "zwitchdev")[0]
 
-	assert aa.GetProps(rsid_list = "zwitchdev")
+	assert "props" in aa.GetProps(rsid_list = "zwitchdev")[0]
 
-	assert aa.GetQueue()
+	assert isinstance(aa.GetQueue(), list)
 
 	#Fail
 	#aa.GetRealTimeReport()
 
-	assert aa.GetRealTimeSettings(rsid_list = "zwitchdev")
+	assert "real_time_settings" in aa.GetRealTimeSettings(rsid_list = "zwitchdev")[0]
 
 	#Fail
 	#aa.GetReportDescription()
 
-	assert aa.GetReportSuites()
+	assert "report_suites" in aa.GetReportSuites()
 
-	assert aa.GetScheduledSpike(rsid_list = "zwitchdev")
+	assert "scheduled_spike" in aa.GetScheduledSpike(rsid_list = "zwitchdev")
 
-	assert aa.GetSegments(rsid_list = "zwitchdev")
+	assert "segments" in aa.GetSegments(rsid_list = "zwitchdev")[0]
 
-	assert aa.GetSiteTitle(rsid_list = "zwitchdev")
+	assert "site_title" in aa.GetSiteTitle(rsid_list = "zwitchdev")[0]
 
-	assert aa.GetEvents(rsid_list = "zwitchdev")
+	assert  "events" in aa.GetEvents(rsid_list = "zwitchdev")[0]
 
-	assert aa.GetTemplate(rsid_list = "zwitchdev")
+	assert "template" in aa.GetTemplate(rsid_list = "zwitchdev")[0]
 
-	assert aa.GetTimeZone(rsid_list = "zwitchdev")
+	assert "time_zone" in aa.GetTimeZone(rsid_list = "zwitchdev")[0]
 
 	#Fail
 	#aa.GetTrackingServer(rsid_list = "zwitchdev")
 
-	assert aa.GetTransactionEnabled(rsid_list = "zwitchdev")
+	assert "transaction" in aa.GetTransactionEnabled(rsid_list = "zwitchdev")[0]
 
-	assert aa.GetUniqueVisitorVariable(rsid_list = "zwitchdev")
+	assert "unique_visitor_variable" in aa.GetUniqueVisitorVariable(rsid_list = "zwitchdev")[0]
 
-	assert aa.GetVersionAccess()
+	assert "sc15" in aa.GetVersionAccess()
 
-	assert aa.GetVideoSettings(rsid_list = "zwitchdev")
+	assert "video_settings" in aa.GetVideoSettings(rsid_list = "zwitchdev")[0]
