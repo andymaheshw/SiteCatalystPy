@@ -129,7 +129,8 @@ class AdobeAnalytics:
 
     def GetClassifications(self, rsid_list, element_list=[]):
         """
-        Retrieves a list of classifications (associated with the specified element) for each of the specified report suites.
+        Retrieves a list of classifications (associated with the specified element) for each of the
+        specified report suites.
 
         Keyword arguments:
         rsid_list = Single report suite id or list of report suites
@@ -196,7 +197,8 @@ class AdobeAnalytics:
         """
         result = {}
         for report in rsid_list:
-            result[report] = self.__callapi('Report.GetElements', reportSuiteID=report, existingElements=elements, existingMetrics=metrics)
+            result[report] = self.__callapi('Report.GetElements', reportSuiteID=report, existingElements=elements,
+                                            existingMetrics=metrics)
         return result
 
     def GetEndpoint(self, company):
@@ -364,7 +366,8 @@ class AdobeAnalytics:
         """
         result = {}
         for report in rsid_list:
-            result[report] = self.__callapi('Report.GetMetrics', reportSuiteID=report, existingElements=elements, existingMetrics=metrics)
+            result[report] = self.__callapi('Report.GetMetrics', reportSuiteID=report, existingElements=elements,
+                                            existingMetrics=metrics)
         return result
 
     def GetMobileAppReporting(self, rsid_list):
@@ -556,7 +559,7 @@ class AdobeAnalytics:
         return self.__callapi('ReportSuite.GetUniqueVisitorVariable', rsid_list=rsid_list)
 
     def GetVersionAccess(self):
-        return self.__callapi('Company.GetVersionAccess', )
+        return self.__callapi('Company.GetVersionAccess',)
 
     def GetVideoSettings(self, rsid_list):
         """
