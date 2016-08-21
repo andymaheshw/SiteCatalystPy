@@ -42,8 +42,8 @@ class AdobeAnalytics:
         created_date = time.strftime("%Y-%m-%dT%H:%M:%SZ",  time.gmtime())
         sha_object = hashlib.sha1((nonce + created_date + '%s' % (self.__shared_secret)).encode('utf-8'))
         password_64 = binascii.b2a_base64(sha_object.digest())
-        X_str = 'UsernameToken Username="%s", PasswordDigest="%s", Nonce="%s", Created="%s"' % \
-        ('%s:%s' % (self.__user_name, self.__company), password_64.strip(), base64nonce.strip(), created_date)
+        X_str = 'UsernameToken Username="%s", PasswordDigest="%s", Nonce="%s", Created="%s"' % (
+        '%s:%s' % (self.__user_name, self.__company), password_64.strip(), base64nonce.strip(), created_date)
         return {'X-WSSE': X_str}
 
     def __callapi(self, endpoint, verb="POST", **kwargs):
@@ -134,7 +134,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list = Single report suite id or list of report suites
         """
-        return self.__callapi('ReportSuite.GetClassifications',rsid_list=rsid_list, element_list=element_list)
+        return self.__callapi('ReportSuite.GetClassifications', rsid_list=rsid_list, element_list=element_list)
 
     def GetCustomCalendar(self, rsid_list):
         """
@@ -424,7 +424,7 @@ class AdobeAnalytics:
     def GetQueue(self, ):
         return self.__callapi('Report.GetQueue')
 
-    def GetRealTimeReport(self,  rsid_list, metrics = [], elements=[], date_granularity=5,
+    def GetRealTimeReport(self, rsid_list, metrics=[], elements=[], date_granularity=5,
                           date_from="1 hour ago", date_to="now", sort_algorithm="mostpopular",
                           floor_sensitivity=.25, first_rank_period=0,
                           algorithm_argument="linear", everything_else=True,

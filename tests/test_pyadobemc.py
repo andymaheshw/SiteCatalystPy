@@ -96,7 +96,7 @@ def test_main():
 
 	assert "report_suites" in aa.GetReportSuites()
 
-	assert "scheduled_spike" in aa.GetScheduledSpike(rsid_list = "zwitchdev")
+	assert "scheduled_spike" in aa.GetScheduledSpike(rsid_list = "zwitchdev")[0]
 
 	assert "segments" in aa.GetSegments(rsid_list = "zwitchdev")[0]
 
