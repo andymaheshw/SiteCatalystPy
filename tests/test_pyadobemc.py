@@ -67,9 +67,9 @@ def test_main():
 
 	assert "email" in aa.GetLogins()[0]
 
-	assert aa.GetMarketingChannelExpiration(rsid_list = "zwitchdev")
+	assert "days" in aa.GetMarketingChannelExpiration(rsid_list = "zwitchdev")[0]
 
-	assert "days" in aa.GetMarketingChannelRules(rsid_list = "zwitchdev")[0]
+	assert "marketing_channel_rules" in aa.GetMarketingChannelRules(rsid_list = "zwitchdev")[0]
 
 	#Fail
 	#aa.GetMetrics(rsid_list = "zwitchdev")

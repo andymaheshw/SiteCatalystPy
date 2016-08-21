@@ -24,13 +24,13 @@ class AdobeAnalytics:
         self.__company = self.__user_name.split(":")[1]
         self.__debug = debug
 
-        #If user doesn't specify their own endpoint, call API to get proper endpoint
-        #Most users should never do this, but some have requested capability in RSiteCatalyst
+        # If user doesn't specify their own endpoint, call API to get proper endpoint
+        # Most users should never do this, but some have requested capability in RSiteCatalyst
         self.__api_url = 'https://api.omniture.com/admin/1.4/rest/'
         if endpoint != '':
             self.__api_url = endpoint
         else:
-            self.__api_url = self.GetEndpoint(company = self.__company)
+            self.__api_url = self.GetEndpoint(company=self.__company)
 
     def __buildheader(self):
         """
@@ -42,15 +42,16 @@ class AdobeAnalytics:
         created_date = time.strftime("%Y-%m-%dT%H:%M:%SZ",  time.gmtime())
         sha_object = hashlib.sha1((nonce + created_date + '%s' % (self.__shared_secret)).encode('utf-8'))
         password_64 = binascii.b2a_base64(sha_object.digest())
-        X_str = 'UsernameToken Username="%s", PasswordDigest="%s", Nonce="%s", Created="%s"' % ('%s:%s' % (self.__user_name, self.__company), password_64.strip(), base64nonce.strip(), created_date)
-        return {'X-WSSE':X_str}
+        X_str = 'UsernameToken Username="%s", PasswordDigest="%s", Nonce="%s", Created="%s"' % \
+        ('%s:%s' % (self.__user_name, self.__company), password_64.strip(), base64nonce.strip(), created_date)
+        return {'X-WSSE': X_str}
 
     def __callapi(self, endpoint, verb="POST", **kwargs):
         """
         Calls the Adobe Analytics API at a given endpoint and variable arguments
         """
 
-        #Automatically convert an rsid_list string type to list as required by API
+        # Automatically convert an rsid_list string type to list as required by API
         if "rsid_list" in kwargs and isinstance(kwargs["rsid_list"], str):
             kwargs["rsid_list"] = [kwargs["rsid_list"]]
 
@@ -72,7 +73,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetActivation', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetActivation', rsid_list=rsid_list)
 
     def GetAxleStartDate(self, rsid_list):
         """
@@ -81,7 +82,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetAxleStartDate', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetAxleStartDate', rsid_list=rsid_list)
 
     def GetBaseCurrency(self, rsid_list):
         """
@@ -90,7 +91,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetBaseCurrency', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetBaseCurrency', rsid_list=rsid_list)
 
     def GetBaseURL(self, rsid_list):
         """
@@ -99,7 +100,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetBaseURL', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetBaseURL', rsid_list=rsid_list)
 
     def GetBookmarks(self, folder_limit=None, folder_offset=None):
         """
@@ -124,16 +125,16 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetCalculatedMetrics', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetCalculatedMetrics', rsid_list=rsid_list)
 
-    def GetClassifications(self, rsid_list, element_list = []):
+    def GetClassifications(self, rsid_list, element_list=[]):
         """
         Retrieves a list of classifications (associated with the specified element) for each of the specified report suites.
 
         Keyword arguments:
         rsid_list = Single report suite id or list of report suites
         """
-        return self.__callapi('ReportSuite.GetClassifications',rsid_list = rsid_list, element_list=element_list)
+        return self.__callapi('ReportSuite.GetClassifications',rsid_list=rsid_list, element_list=element_list)
 
     def GetCustomCalendar(self, rsid_list):
         """
@@ -142,7 +143,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetCustomCalendar', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetCustomCalendar', rsid_list=rsid_list)
 
     def GetDashboards(self, ):
         return self.__callapi('Bookmark.GetDashboards', )
@@ -154,7 +155,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetDataWarehouseDisplay', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetDataWarehouseDisplay', rsid_list=rsid_list)
 
     def GetDefaultPage(self, rsid_list):
         """
@@ -163,7 +164,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetDefaultPage', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetDefaultPage', rsid_list=rsid_list)
 
     def GetDiscoverEnabled(self, rsid_list):
         """
@@ -172,7 +173,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetDiscoverEnabled', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetDiscoverEnabled', rsid_list=rsid_list)
 
     def GetEcommerce(self, rsid_list):
         """
@@ -181,9 +182,9 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetEcommerce', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetEcommerce', rsid_list=rsid_list)
 
-    def GetElements(self, rsid_list, elements=[], metrics =[]):
+    def GetElements(self, rsid_list, elements=[], metrics=[]):
         """
        Get Valid Elements for a Report Suite
 
@@ -205,7 +206,7 @@ class AdobeAnalytics:
         Keyword arguments:
         company -- Company to retrieve endpoint for
         """
-        return self.__callapi('Company.GetEndpoint', "GET", company = company)
+        return self.__callapi('Company.GetEndpoint', "GET", company=company)
 
     def GetEvars(self, rsid_list):
         """
@@ -214,7 +215,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetEvars', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetEvars', rsid_list=rsid_list)
 
     def GetFeed(self, feed_id):
         """
@@ -223,7 +224,7 @@ class AdobeAnalytics:
         Keyword arguments:
         feed_id -- Data Feed ID
         """
-        return self.__callapi('DataFeed.GetFeed',feed_id=feed_id)
+        return self.__callapi('DataFeed.GetFeed', feed_id=feed_id)
 
     def GetFeeds(self, rsid_list, start_time="", end_time="", status=[]):
         """
@@ -250,7 +251,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetGeoSegmentation', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetGeoSegmentation', rsid_list=rsid_list)
 
     def GetGroups(self, ):
         return self.__callapi('Permissions.GetGroups', )
@@ -262,7 +263,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetInternalURLFilters', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetInternalURLFilters', rsid_list=rsid_list)
 
     def GetIPAddressExclusions(self, rsid_list):
         """
@@ -271,7 +272,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetIPAddressExclusions', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetIPAddressExclusions', rsid_list=rsid_list)
 
     def GetIPObfuscation(self, rsid_list):
         """
@@ -280,7 +281,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetIPObfuscation', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetIPObfuscation', rsid_list=rsid_list)
 
     def GetKeyVisitors(self, rsid_list):
         """
@@ -289,7 +290,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetKeyVisitors', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetKeyVisitors', rsid_list=rsid_list)
 
     def GetListVariables(self, rsid_list):
         """
@@ -298,7 +299,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetListVariables', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetListVariables', rsid_list=rsid_list)
 
     def GetLocalization(self, rsid_list):
         """
@@ -307,7 +308,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetLocalization', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetLocalization', rsid_list=rsid_list)
 
     def GetLogin(self, ):
         return self.__callapi('Permissions.GetLogin', )
@@ -322,7 +323,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetMarketingChannelCosts', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetMarketingChannelCosts', rsid_list=rsid_list)
 
     def GetMarketingChannelExpiration(self, rsid_list):
         """
@@ -331,7 +332,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetMarketingChannelExpiration', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetMarketingChannelExpiration', rsid_list=rsid_list)
 
     def GetMarketingChannelRules(self, rsid_list):
         """
@@ -340,7 +341,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetMarketingChannelRules', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetMarketingChannelRules', rsid_list=rsid_list)
 
     def GetMarketingChannels(self, rsid_list):
         """
@@ -349,7 +350,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetMarketingChannels',  rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetMarketingChannels',  rsid_list=rsid_list)
 
     def GetMetrics(self, rsid_list, elements=[], metrics=[]):
         """
@@ -373,7 +374,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetMobileAppReporting', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetMobileAppReporting', rsid_list=rsid_list)
 
     def GetPaidSearchDetection(self, rsid_list):
         """
@@ -382,7 +383,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetPaidSearchDetection', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetPaidSearchDetection', rsid_list=rsid_list)
 
     def GetPermanentTraffic(self, rsid_list):
         """
@@ -391,7 +392,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetPermanentTraffic', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetPermanentTraffic', rsid_list=rsid_list)
 
     def GetProcessingStatus(self, rsid_list):
         """
@@ -400,8 +401,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetPermanentTraffic', rsid_list = rsid_list)
-
+        return self.__callapi('ReportSuite.GetPermanentTraffic', rsid_list=rsid_list)
 
     def GetPrivacySettings(self, rsid_list):
         """
@@ -410,7 +410,7 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetPrivacySettings', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetPrivacySettings', rsid_list=rsid_list)
 
     def GetProps(self, rsid_list):
         """
@@ -419,16 +419,16 @@ class AdobeAnalytics:
         Keyword arguments:
         rsid_list -- Report suites to evaluate
         """
-        return self.__callapi('ReportSuite.GetProps', rsid_list = rsid_list)
+        return self.__callapi('ReportSuite.GetProps', rsid_list=rsid_list)
 
     def GetQueue(self, ):
         return self.__callapi('Report.GetQueue')
 
     def GetRealTimeReport(self,  rsid_list, metrics = [], elements=[], date_granularity=5,
-                              date_from="1 hour ago", date_to="now", sort_algorithm="mostpopular",
-                              floor_sensitivity=.25, first_rank_period=0,
-                              algorithm_argument="linear", everything_else=True,
-                              selected=[]):
+                          date_from="1 hour ago", date_to="now", sort_algorithm="mostpopular",
+                          floor_sensitivity=.25, first_rank_period=0,
+                          algorithm_argument="linear", everything_else=True,
+                          selected=[]):
         """
         Function to access the Adobe Analytics Real-Time API v1.4.
         This API provides the ability for reporting up to the most recent minute.
