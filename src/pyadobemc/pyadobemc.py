@@ -43,7 +43,7 @@ class AdobeAnalytics:
         sha_object = hashlib.sha1((nonce + created_date + '%s' % (self.__shared_secret)).encode('ascii'))
         password_64 = binascii.b2a_base64(sha_object.digest())
         X_str = 'UsernameToken Username="%s", PasswordDigest="%s", Nonce="%s", Created="%s"' % (
-            '%s:%s' % (self.__user_name, self.__company), password_64, base64nonce, created_date)
+            '%s:%s' % (self.__user_name, self.__company), password_64.strip(), base64nonce.strip(), created_date)
         return {'X-WSSE': X_str}
 
     def __callapi(self, endpoint, verb="POST", **kwargs):
