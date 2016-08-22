@@ -40,8 +40,8 @@ class AdobeAnalytics:
         nonce = str(time.time())
         base64nonce = binascii.b2a_base64(binascii.a2b_qp(nonce))
         created_date = time.strftime("%Y-%m-%dT%H:%M:%SZ",  time.gmtime())
-        sha_object = hashlib.sha1((nonce + created_date + '%s' % (self.__shared_secret)).encode('ascii'))
-        password_64 = binascii.b2a_base64(sha_object.digest())
+        sha_object = hashlib.sha1((nonce + created_date + '%s' % (self.__shared_secret)))
+        password_64 = binascii.b2a_base64(bytes(sha_object.digest()))
         X_str = 'UsernameToken Username="%s", PasswordDigest="%s", Nonce="%s", Created="%s"' % (
             '%s:%s' % (self.__user_name, self.__company), password_64.strip(), base64nonce.strip(), created_date)
         return {'X-WSSE': X_str}
