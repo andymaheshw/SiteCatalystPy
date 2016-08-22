@@ -27,7 +27,7 @@ setup(
     license='MIT',
     description='A Python wrapper for the Adobe Analytics API',
     long_description='A Python wrapper for the Adobe Analytics API',
-    author='Andy Maheshwari, Randy Zwitch',
+    author='Anirudh Maheshwari, Randy Zwitch',
     author_email='andymaheshw@gmail.com',
     url='https://github.com/andymaheshw/AdobeAnalytics',
     packages=find_packages('src'),
