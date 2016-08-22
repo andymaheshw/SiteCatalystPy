@@ -13,7 +13,6 @@ env:
   - TOXENV=py33
   - TOXENV=py34
   - TOXENV=py35
-  - TOXENV=pypy
 before_install:
 - python --version
 - uname -a
