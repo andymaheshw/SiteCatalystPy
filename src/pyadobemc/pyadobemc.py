@@ -38,12 +38,12 @@ class AdobeAnalytics:
         by other public method calls.
         """
         nonce = str(time.time())
-        base64nonce = binascii.b2a_base64(binascii.a2b_qp(nonce))
+        base64nonce = binascii.b2a_base64(binascii.a2b_qp(nonce)).decode('utf-8')
         created_date = time.strftime("%Y-%m-%dT%H:%M:%SZ",  time.gmtime())
-        sha_object = hashlib.sha1((nonce + created_date + '%s' % (self.__shared_secret)))
-        password_64 = binascii.b2a_base64(bytes(sha_object.digest()))
+        sha_object = hashlib.sha1((nonce + created_date + '%s' % (self.__shared_secret)).encode('utf-8'))
+        password_64 = binascii.b2a_base64(sha_object.digest()).decode('utf-8')
         X_str = 'UsernameToken Username="%s", PasswordDigest="%s", Nonce="%s", Created="%s"' % (
-            '%s:%s' % (self.__user_name, self.__company), password_64.strip(), base64nonce.strip(), created_date)
+            '%s:%s' % (self.__user_name, self.__company), password_64, base64nonce, created_date)
         return {'X-WSSE': X_str}
 
     def __callapi(self, endpoint, verb="POST", **kwargs):
