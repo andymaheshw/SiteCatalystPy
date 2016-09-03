@@ -63,7 +63,7 @@ def test_main():
 
 	assert aa.GetLocalization(rsid_list = "zwitchdev")[0]["localization"]
 
-	assert aa.GetLogin()["first_name"] == "Randy"
+	assert (aa.GetLogin()["first_name"] == "Randy") or (aa.GetLogin()["first_name"] == "Andy")
 
 	assert "email" in aa.GetLogins()[0]
 
